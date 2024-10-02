@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import userRoute from './routes/userRoute.js';
+
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ mongoose
     console.log(err);
 });
 
+
+app.use('/api/user', userRoute);
 
 
 app.listen(9000, () => {
