@@ -60,7 +60,7 @@ const Signup = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '110vh', // this one is for the dhererka
+        height: '100vh', // this one is for the dhererka
       }}
     >
       <Box
