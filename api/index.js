@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
+import supplierRoute from './routes/supplierRoute.js';
+
 
 dotenv.config();
 
@@ -22,6 +24,8 @@ mongoose
 
 app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/supplier', supplierRoute);
+
 
 app.listen(9000, () => {
     console.log('Server is running on port 9000');

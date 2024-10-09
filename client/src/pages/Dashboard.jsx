@@ -17,7 +17,6 @@ import {
   Divider,
   Container,
   ListItemIcon,
-  Tooltip,
   Card,
   CardContent
 } from '@mui/material';
@@ -39,11 +38,12 @@ import Sales from '../components/Sales';
 import SalesItem from '../components/SalesItem';
 import Suppliers from '../components/Suppliers';
 
-const drawerWidth = 150; // Sidebar width updated for text + icon layout
+const drawerWidth = 150;
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true); // State for sidebar open/close
   const [selectedTable, setSelectedTable] = useState('Products');
 
   const theme = createTheme({
@@ -64,6 +64,10 @@ const Dashboard = () => {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen);
   };
 
   const renderTable = () => {
@@ -103,10 +107,10 @@ const Dashboard = () => {
           { text: 'Suppliers', icon: <People /> }
         ].map((item) => (
           <ListItem button key={item.text} onClick={() => setSelectedTable(item.text)}>
-            <ListItemIcon sx={{ minWidth: '3px' }}> {/* Adjusted minWidth */}
+            <ListItemIcon sx={{ minWidth: '3px' }}>
               {item.icon}
             </ListItemIcon>
-            <ListItemText primary={item.text} sx={{ marginLeft: '1=px' }} /> {/* Reduced margin */}
+            <ListItemText primary={item.text} sx={{ marginLeft: '1=px' }} />
           </ListItem>
         ))}
       </List>
@@ -120,32 +124,34 @@ const Dashboard = () => {
         <AppBar
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
-            ml: { sm: `${drawerWidth}px` },
+            width: sidebarOpen ? { sm: `calc(100% - ${drawerWidth}px)` } : '100%', // Adjust width when sidebar is closed
+            ml: sidebarOpen ? { sm: `${drawerWidth}px` } : '0', // Remove margin when sidebar is closed
             backgroundColor: darkMode ? '#333' : '#1976d2',
           }}
         >
           <Toolbar>
+            {/* Toggle Button for Sidebar */}
             <IconButton
               color="inherit"
-              aria-label="open drawer"
+              aria-label="toggle drawer"
               edge="start"
-              onClick={handleDrawerToggle}
-              sx={{ mr: 0, display: { sm: 'none' } }}
+              onClick={handleSidebarToggle}
+              sx={{ mr: 2, display: { sm: 'block' } }}
             >
               <Menu />
             </IconButton>
             <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-              Latest Sales & Products
+              Inventory Dashboard
             </Typography>
             <IconButton color="inherit" onClick={handleThemeToggle}>
               {darkMode ? <Brightness7 /> : <Brightness4 />}
             </IconButton>
           </Toolbar>
         </AppBar>
+
         <Box
           component="nav"
-          sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+          sx={{ width: { sm: sidebarOpen ? drawerWidth : 0 }, flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
           <Drawer
@@ -153,7 +159,7 @@ const Dashboard = () => {
             open={mobileOpen}
             onClose={handleDrawerToggle}
             ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
+              keepMounted: true,
             }}
             sx={{
               display: { xs: 'block', sm: 'none' },
@@ -163,48 +169,29 @@ const Dashboard = () => {
             {drawer}
           </Drawer>
           <Drawer
-            variant="permanent"
+            variant={sidebarOpen ? 'permanent' : 'temporary'} // Change variant based on sidebar state
             sx={{
-              display: { xs: 'none', sm: 'block' },
+              display: { xs: 'none', sm: sidebarOpen ? 'block' : 'none' }, // Hide the sidebar when it's closed in full screen
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: darkMode ? '#333' : '#f4f6f8' },
             }}
-            open
+            open={sidebarOpen}
           >
             {drawer}
           </Drawer>
         </Box>
+
         <Box
           component="main"
           sx={{
             flexGrow: 1,
             p: 3,
-            width: { sm: `calc(100% - ${drawerWidth}px)` },
+            width: `calc(100% - ${drawerWidth}px)`,
             backgroundColor: darkMode ? '#181818' : '#f4f6f8',
           }}
         >
           <Toolbar />
           <Container maxWidth="lg">
             <Grid container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6">Latest Sales</Typography>
-                    <Typography variant="body1">
-                      Display the latest sales information here...
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Card>
-                  <CardContent>
-                    <Typography variant="h6">Top Products</Typography>
-                    <Typography variant="body1">
-                      Display the top-performing products here...
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
               <Grid item xs={12}>
                 <Paper sx={{ p: 3, backgroundColor: darkMode ? '#333' : '#fff' }}>
                   <Typography variant="h5" component="div">
