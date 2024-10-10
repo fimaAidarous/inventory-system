@@ -1,4 +1,5 @@
 import Supplier  from '../models/supplierModel.js';
+import { errorHandler } from '../utils/error.js';
 
 export const createSupplier = async (req, res, next) => {
     const { name, contact } = req.body;
@@ -27,3 +28,16 @@ export const getAllsuppliers = async (req,res,next) => {
   }
 };
 
+
+// Get a supplier by ID
+export const getSupplierById = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const supplier = await Supplier.findById(id);
+    if (!supplier) return next(errorHandler(404, 'Supplier not found'));
+    res.status(200).json(supplier);
+  } catch (error) {
+    next(error);
+  }
+};
