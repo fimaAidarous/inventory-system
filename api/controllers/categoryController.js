@@ -26,3 +26,16 @@ export const getAllCategories = async (req,res,next) => {
         next(error);
     }
 };
+
+// Get Category by ID
+export const getCategoryById = async (req,res,next) => {
+    const { id } = req.params;
+
+    try {
+        const category = await Category.findById(id);
+        if(!category) return next(errorHandler(404, 'Category not found'));
+        res.status(200).json(category);
+    } catch (error) {
+        next(error);
+    }
+};
