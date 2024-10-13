@@ -5,7 +5,7 @@ import cors from 'cors';
 import userRoute from './routes/userRoute.js';
 import authRoute from './routes/authRoute.js';
 import supplierRoute from './routes/supplierRoute.js';
-
+import categoryRoutes from './routes/categoryRoutes.js';
 
 dotenv.config();
 
@@ -25,6 +25,7 @@ mongoose
 app.use('/api/user', userRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/supplier', supplierRoute);
+app.use('/api/categories', categoryRoutes);
 
 
 app.listen(9000, () => {
