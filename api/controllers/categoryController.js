@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 import Category from '../models/categoryModel.js';
 import { errorHandler } from '../utils/error.js';
 
@@ -35,6 +35,26 @@ export const getCategoryById = async (req,res,next) => {
         const category = await Category.findById(id);
         if(!category) return next(errorHandler(404, 'Category not found'));
         res.status(200).json(category);
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Update Category
+export const updateCategory = async(req,res,next) => {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    try {
+    const category = await Category.findOneAndUpdate(
+        {_id: new mongoose.Types.ObjectId(id) },
+        { name, updated_at:Date.now() },
+        { new: true }
+    );
+
+    if(!category) return next(errorHandler(404,'Category not found'));
+
+    res.status(200).json('Category updated successfully!');
     } catch (error) {
         next(error);
     }
