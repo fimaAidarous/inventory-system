@@ -59,3 +59,17 @@ export const updateCategory = async(req,res,next) => {
         next(error);
     }
 };
+
+export const deleteCategory = async(req,res,next) => {
+    const { id } = req.params;
+
+    try {
+    const category = await Category.findByIdAndDelete({_id: new mongoose.Types.ObjectId(id) });
+    
+    if(!category) return next(errorHandler(404, 'Category not found'));
+
+    res.status(200).json('Category deleted successfully!');
+    } catch (error) {
+        next(error);
+    }
+};
