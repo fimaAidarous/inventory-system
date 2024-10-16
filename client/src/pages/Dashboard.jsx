@@ -22,14 +22,16 @@ import {
   Inventory,
   ShoppingCart,
   People,
+  Category, // Import Category icon for categories
 } from "@mui/icons-material";
-import { Link, Routes, Route } from "react-router-dom"; // Correct imports from react-router-dom
+import { Link, Routes, Route } from "react-router-dom";
 import ProductsTable from "../components/Products";
 import Purchases from "../components/Purchases";
 import CreateSupplier from "../components/CreateSupplier";
 import UpdateSupplier from "../components/UpdateSupplier";
 import DeleteSupplier from "../components/DeleteSupplier";
 import SupplierList from "../components/SupplierList";
+import CreateCategory from "../components/CreateCategory"; // Import the CategoryCreate component
 
 const drawerWidth = 150;
 
@@ -84,6 +86,12 @@ const Dashboard = () => {
             <People />
           </ListItemIcon>
           <ListItemText primary="Suppliers" />
+        </ListItem>
+        <ListItem button component={Link} to="/create-category"> {/* New ListItem for CategoryCreate */}
+          <ListItemIcon sx={{ minWidth: "3px" }}>
+            <Category />
+          </ListItemIcon>
+          <ListItemText primary="Category" />
         </ListItem>
       </List>
     </div>
@@ -186,6 +194,7 @@ const Dashboard = () => {
             <Route path="/update-supplier/:id" element={<UpdateSupplier />} />
             <Route path="/delete-supplier/:id" element={<DeleteSupplier />} />
             <Route path="/suppliers" element={<SupplierList />} />
+            <Route path="/create-category" element={<CreateCategory />} /> 
           </Routes>
         </Box>
       </Box>
