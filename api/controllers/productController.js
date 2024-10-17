@@ -86,3 +86,19 @@ export const updateProduct = async (req, res, next) => {
     next(error);
   }
 };
+
+export const getProduct = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const product = await Product.findById(id).populate('category_id supplier_id');
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found!" });
+    }
+
+    res.status(200).json(product);
+  } catch (error) {
+    next(error);
+  }
+};
