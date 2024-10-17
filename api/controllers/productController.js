@@ -48,3 +48,41 @@ export const getAllProducts = async (req,res,next) => {
     next(error);
   }
 };
+
+
+export const updateProduct = async (req, res, next) => {
+  const { id } = req.params;
+  const {
+    name,
+    description,
+    price,
+    cost_price,
+    stock_quantity,
+    category_id,
+    supplier_id,
+  } = req.body;
+
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      {
+        name,
+        description,
+        price,
+        cost_price,
+        stock_quantity,
+        category_id: new mongoose.Types.ObjectId(category_id),
+        supplier_id: new mongoose.Types.ObjectId(supplier_id),
+      },
+      { new: true }
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found!" });
+    }
+
+    res.status(200).json({ message: "Product updated successfully!", updatedProduct });
+  } catch (error) {
+    next(error);
+  }
+};
