@@ -13,7 +13,6 @@ export const createProduct = async (req, res, next) => {
     supplier_id,
   } = req.body;
 
-  // Validate that category_id and supplier_id are valid ObjectIds
   if (!mongoose.Types.ObjectId.isValid(category_id)) {
     return res.status(400).json({ message: "Invalid category ID" });
   }
@@ -35,6 +34,16 @@ export const createProduct = async (req, res, next) => {
   try {
     await newProduct.save();
     res.status(201).json("Product created successfully!");
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAllProducts = async (req,res,next) => {
+  try {
+    const products = await Product.find().populate('category_id supplier_id');
+
+    res.status(200).json(products);
   } catch (error) {
     next(error);
   }
