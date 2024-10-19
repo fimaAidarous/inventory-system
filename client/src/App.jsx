@@ -11,6 +11,10 @@ import CreateCategory from './components/CreateCategory';
 import UpdateCategory from './components/UpdateCategory';
 import DeleteCategory from './components/DeleteCategory';
 import CategoryList from './components/CategoryList';
+import CreateProduct from './components/CreateProduct'; 
+import UpdateProduct from './components/UpdateProduct'; 
+import DeleteProduct from './components/DeleteProduct'; 
+import ProductList from './components/ProductList'; 
 
 export default function App() {
   return (
@@ -32,6 +36,13 @@ export default function App() {
         <Route path="/update-category/:categoryId" element={<UpdateCategory />} />
         <Route path="/delete-category/:id" element={<DeleteCategory />} /> 
         <Route path="/categories" element={<CategoryList />} /> 
+
+        {/* Product routes */}
+        <Route path="/create-product" element={<CreateProduct />} />
+        <Route path="/update-product/:productId" element={<UpdateProduct />} />
+        <Route path="/delete-product/:productId" element={<DeleteProduct />} />
+        <Route path="/products" element={<ProductList />} /> 
+
       </Routes>
     </BrowserRouter>
   );
