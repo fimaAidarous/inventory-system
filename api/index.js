@@ -7,6 +7,7 @@ import authRoute from './routes/authRoute.js';
 import supplierRoute from './routes/supplierRoute.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
+import purchaseRoute from './routes/purchaseRoute.js';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use('/api/auth', authRoute);
 app.use('/api/supplier', supplierRoute);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes); 
+app.use('/api/purchases', purchaseRoute);
 
 
 app.listen(9000, () => {

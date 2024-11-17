@@ -1,4 +1,4 @@
-import mongoose, { mongo } from 'mongoose';
+import mongoose from 'mongoose';
 
 const PurchaseSchema = new mongoose.Schema({
     supplier_id: {
@@ -6,13 +6,34 @@ const PurchaseSchema = new mongoose.Schema({
         ref: 'Supplier',
         required: true,
     },
-    total: {
-        type: mongoose.Types.Decimal128,
+    productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product', 
         required: true,
     },
-    purchase_date: {
+    quantity: {
+        type: Number,
+        required: true,
+        min: 1, 
+    },
+    price: {
+        type: mongoose.Types.Decimal128,
+        required: true,
+        min: 0, 
+    },
+    totalAmount: {
+        type: mongoose.Types.Decimal128,
+        required: true,
+        min: 0, 
+    },
+    purchaseDate: {
         type: Date,
         required: true,
+    },
+    status: {
+        type: String,
+        enum: ['completed', 'pending', 'cancelled'],
+        default: 'pending',
     },
     created_at: {
         type: Date,
