@@ -8,6 +8,7 @@ import supplierRoute from './routes/supplierRoute.js';
 import categoryRoutes from './routes/categoryRoutes.js';
 import productRoutes from './routes/productRoutes.js';
 import purchaseRoute from './routes/purchaseRoute.js';
+import storeRoute from './routes/storeRoute.js';
 
 dotenv.config();
 
@@ -30,7 +31,7 @@ app.use('/api/supplier', supplierRoute);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/products', productRoutes); 
 app.use('/api/purchases', purchaseRoute);
-
+app.use('/api/stores', storeRoute);
 
 app.listen(9000, () => {
     console.log('Server is running on port 9000');
