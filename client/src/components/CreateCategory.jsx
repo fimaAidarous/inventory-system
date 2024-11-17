@@ -61,7 +61,7 @@ const CreateCategory = () => {
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Category Name"
             value={formData.name}

@@ -87,14 +87,14 @@ const CreateProduct = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <Paper elevation={6} sx={{ padding: "20px", borderRadius: "16px" }}>
+      <Paper elevation={6} sx={{ padding: "8px", borderRadius: "20px" }}>
         <Typography variant="h5" align="center" gutterBottom>
           Create Product
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Name"
             value={formData.name}
@@ -103,7 +103,7 @@ const CreateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Description"
             name="description"
@@ -121,7 +121,7 @@ const CreateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Price"
             value={formData.price}
@@ -132,7 +132,7 @@ const CreateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Cost Price"
             value={formData.cost_price}
@@ -143,7 +143,7 @@ const CreateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Stock Quantity"
             value={formData.stock_quantity}
@@ -155,7 +155,7 @@ const CreateProduct = () => {
           <TextField
             select
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Category"
             value={formData.category_id}
@@ -173,7 +173,7 @@ const CreateProduct = () => {
           <TextField
             select
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Supplier"
             value={formData.supplier_id}
@@ -194,7 +194,7 @@ const CreateProduct = () => {
             color="primary"
             fullWidth
             disabled={loading}
-            sx={{ marginTop: "16px" }}
+            sx={{ marginTop: "8px" }}
           >
             {loading ? <CircularProgress size={24} /> : "Create Product"}
           </Button>

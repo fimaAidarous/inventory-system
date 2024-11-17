@@ -75,7 +75,7 @@ const UpdateProduct = () => {
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Product Name"
             value={formData.name}
@@ -85,7 +85,7 @@ const UpdateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Description"
             value={formData.description}
@@ -95,7 +95,7 @@ const UpdateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Price"
             value={formData.price}
@@ -106,7 +106,7 @@ const UpdateProduct = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Stock Quantity"
             value={formData.stock_quantity}
@@ -116,7 +116,7 @@ const UpdateProduct = () => {
             sx={{ borderRadius: '8px' }}
           />
           <Button
-            type="submit"
+            type="dense"
             variant="contained"
             color="primary"
             fullWidth

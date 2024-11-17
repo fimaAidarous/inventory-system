@@ -73,7 +73,7 @@ const UpdateSupplier = () => {
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Supplier Name"
             value={formData.name}
@@ -83,7 +83,7 @@ const UpdateSupplier = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Supplier Contact"
             value={formData.contact}

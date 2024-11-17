@@ -57,7 +57,7 @@ const CreateSupplier = () => {
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Supplier Name"
             value={formData.name}
@@ -67,7 +67,7 @@ const CreateSupplier = () => {
           />
           <TextField
             variant="outlined"
-            margin="normal"
+            margin="dense"
             fullWidth
             label="Supplier Contact"
             value={formData.contact}
