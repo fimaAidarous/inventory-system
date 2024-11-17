@@ -1,6 +1,7 @@
 import Store from '../models/storeModel.js';
 import Product from '../models/productModel.js';
 import mongoose from 'mongoose';
+import { json } from 'express';
 
 export const createStore = async (req,res) => {
     const { productId, quantity } = req.body;
@@ -27,7 +28,7 @@ export const createStore = async (req,res) => {
       console.error(error);
       res.status(500).json({ message: 'Error creating store' });
     }
-  };
+};
 
 
 export const updateStore = async (req, res, next) => {
@@ -52,7 +53,7 @@ export const updateStore = async (req, res, next) => {
     } catch (error) {
       next(error);
     }
-  };
+};
   
 
 export const getAllStores = async (req,res) => {
@@ -63,5 +64,21 @@ export const getAllStores = async (req,res) => {
        console.error(error);
        res.status(500).json({ message: 'Error fetching stores'});
     }
-   };
+};
+
+export const getStore = async(req,res,next) => {
+    const { id } = req.params;
+
+    try {
+       const store = await Store.findById(id).populate('productId');
+       if(!store) {
+        return res.status(404),json({ message: 'Store not found!'});
+       } 
+
+       res.status(200).json(store);
+    } catch (error) {
+        next(error);
+    }
+};
+
 
