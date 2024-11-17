@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 
 const UpdateSupplier = () => {
-  const { supplierId } = useParams(); // Get supplierId from route
+  const { supplierId } = useParams(); 
   const [formData, setFormData] = useState({ name: '', contact: '' });
   const dispatch = useDispatch();
   const { loading, error, suppliers } = useSelector((state) => state.supplier);
@@ -47,16 +47,12 @@ const UpdateSupplier = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-
       if (!response.ok) {
         throw new Error(data.message || 'Failed to update supplier');
       }
-
-      dispatch(updateSupplierSuccess(data)); // Pass the updated supplier data to the success action
+      dispatch(updateSupplierSuccess(data)); 
       setSuccessMessage("Supplier updated successfully!"); 
       setSnackbarOpen(true); 
-
-      // Fetch the suppliers again to refresh the list
       dispatch(fetchSuppliers());
     } catch (error) {
       dispatch(updateSupplierFailure(error.message));

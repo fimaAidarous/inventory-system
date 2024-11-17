@@ -5,7 +5,7 @@ import {
   updateProductStart,
   updateProductSuccess,
   updateProductFailure,
-  fetchProducts, // Import the fetchProducts action
+  fetchProducts, 
 } from '../redux/productSlice';
 import {
   Container,

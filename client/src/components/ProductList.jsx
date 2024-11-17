@@ -13,7 +13,9 @@ const ProductList = () => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const handleCloseSnackbar = () => {
+  const handleCloseSnackbar = (_, reason) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
   };
 
   if (loading) return <CircularProgress style={{ margin: "20px auto", display: "block" }} />;

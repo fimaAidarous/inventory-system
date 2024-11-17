@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Container, Box, MenuItem, Alert, Link } from '@mui/material';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom'; 
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,10 +12,8 @@ const Signup = () => {
 
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [isSignInMode, setIsSignInMode] = useState(false); // State to toggle between Sign Up and Sign In
-  
-  const navigate = useNavigate();  // Initialize useNavigate
-
+  const [isSignInMode, setIsSignInMode] = useState(false);
+  const navigate = useNavigate();  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -40,7 +38,6 @@ const Signup = () => {
         setFormData({ username: '', email: '', password: '', role: 'employee' }); // Reset form
 
         if (!isSignInMode) {
-          // Redirect to Sign In page after successful Sign Up
           navigate('/sign-in');
         }
       } else {
@@ -74,7 +71,7 @@ const Signup = () => {
           boxShadow: 5,
           border: '2px solid green',
           width: '90%', // this one is for balaca 
-          maxWidth: 300, // Adjusted for better appearance
+          maxWidth: 300, 
         }}
       >
         <Typography component="h1" variant="h6" sx={{ marginBottom: 2, color: '#00796b' }}>
@@ -144,8 +141,6 @@ const Signup = () => {
         </form>
         {error && <Alert severity="error" sx={{ width: '100%' }}>{error}</Alert>}
         {success && <Alert severity="success" sx={{ width: '100%' }}>{success}</Alert>}
-
-        {/* Link to toggle between Sign In and Sign Up */}
         <Box sx={{ mt: 1 }}>
           <Typography variant="body2" color="textSecondary">
             {isSignInMode ? "Don't have an account?" : 'Already have an account? '}

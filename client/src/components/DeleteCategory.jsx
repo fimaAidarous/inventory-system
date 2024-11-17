@@ -23,14 +23,10 @@ const DeleteCategory = ({ categoryId }) => {
       }
       dispatch(deleteCategorySuccess(categoryId));
       dispatch(fetchCategories());
-
-      // Set success message and open snackbar
       setSuccessMessage('Category deleted successfully!');
       setSnackbarOpen(true);
     } catch (error) {
-      dispatch(deleteCategoryFailure(error.message));
-
-      // Set error message and open snackbar
+      dispatch(deleteCategoryFailure(error.message));      
       setErrorMessage(error.message);
       setSnackbarOpen(true);
     }
@@ -47,8 +43,6 @@ const DeleteCategory = ({ categoryId }) => {
       <Button variant="contained" color="secondary" onClick={handleDelete}>
         Delete
       </Button>
-
-      {/* Snackbar for success or error message */}
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
         <Alert
           onClose={handleCloseSnackbar}

@@ -68,7 +68,7 @@ export const deleteSupplier = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    // Find the supplier by _id and delete
+    // Find the supplier by_id and delete
     const supplier = await Supplier.findOneAndDelete({ _id: new mongoose.Types.ObjectId(id) });
 
     if (!supplier) return next(errorHandler(404, 'Supplier not found'));

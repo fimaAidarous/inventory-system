@@ -56,7 +56,7 @@ const CreateProduct = () => {
       });
   
       const data = await response.json();
-      console.log('API Response:', data); // Check the API response
+      console.log('API Response:', data); 
   
       if (!response.ok) {
         throw new Error(data.message || 'Failed to create product');

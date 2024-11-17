@@ -17,15 +17,11 @@ const DeleteSupplier = ({ supplierId }) => {
   const { loading, error } = useSelector((state) => state.supplier);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
-
-  // Handle supplier deletion
   const handleDelete = async () => {
     if (!supplierId) {
       alert('No supplier ID provided. Please try again.');
       return;
     }
-
-    // Confirm deletion with the user
     const confirmed = window.confirm('Are you sure you want to delete this supplier?');
     if (confirmed) {
       dispatch(deleteSupplierStart());
@@ -33,12 +29,10 @@ const DeleteSupplier = ({ supplierId }) => {
         const response = await fetch(`http://localhost:9000/api/supplier/${supplierId}`, {
           method: 'DELETE',
         });
-
         if (!response.ok) {
           const errorMessage = await response.text();
           throw new Error(`Failed to delete supplier: ${errorMessage}`);
         }
-
         dispatch(deleteSupplierSuccess(supplierId));
         setSuccessMessage('Supplier deleted successfully!');
       } catch (err) {
@@ -50,7 +44,6 @@ const DeleteSupplier = ({ supplierId }) => {
     }
   };
 
-  // Close Snackbar
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
@@ -71,8 +64,6 @@ const DeleteSupplier = ({ supplierId }) => {
       >
         {loading ? <CircularProgress size={24} /> : 'Delete'}
       </Button>
-
-      {/* Snackbar to display success or error messages */}
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}

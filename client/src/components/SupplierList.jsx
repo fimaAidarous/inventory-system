@@ -13,8 +13,9 @@ const SupplierList = () => {
     dispatch(fetchSuppliers());
   }, [dispatch]);
 
-  const handleCloseSnackbar = () => {
-    // Logic to close snackbar can be added if you're using local state for Snackbar
+  const handleCloseSnackbar = (_, reason) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
   };
 
   if (loading)
@@ -71,7 +72,6 @@ const SupplierList = () => {
               />
               <Grid container spacing={1}>
                 <Grid item>
-                  {/* Wrap Button with Link */}
                   <Link to={`/update-supplier/${supplier._id}`} style={{ textDecoration: 'none' }}>
                     <Button
                       variant="contained"
@@ -83,7 +83,6 @@ const SupplierList = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  {/* Pass supplierId to DeleteSupplier */}
                   <DeleteSupplier supplierId={supplier._id} />
                 </Grid>
               </Grid>

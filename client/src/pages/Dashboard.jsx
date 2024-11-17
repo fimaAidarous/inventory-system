@@ -22,7 +22,7 @@ import {
   Inventory,
   ShoppingCart,
   People,
-  Category, // Import Category icon for categories
+  Category,
 } from "@mui/icons-material";
 import { Link, Routes, Route } from "react-router-dom";
 import Purchases from "../components/Purchases";

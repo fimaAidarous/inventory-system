@@ -23,11 +23,10 @@ const SignIn = () => {
       });
 
       if (response.ok) {
-        const data = await response.json(); // Optionally, handle the response data
+        const data = await response.json();
         setSuccess('User signed in successfully!');
         setError('');
-        // Navigate to the dashboard
-        navigate('/dashboard'); // Ensure this route matches your router setup
+        navigate('/dashboard'); 
       } else {
         const errMessage = await response.text();
         setError(errMessage || 'Something went wrong');

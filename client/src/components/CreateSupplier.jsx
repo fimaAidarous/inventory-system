@@ -35,12 +35,12 @@ const CreateSupplier = () => {
         throw new Error(data.message || "Failed to create supplier");
       }
       dispatch(createSupplierSuccess(data));
-      setSuccessMessage("Supplier created successfully!"); // Set success message
-      setFormData({ name: '', contact: '' }); // Reset form data
-      setSnackbarOpen(true); // Show success snackbar
+      setSuccessMessage("Supplier created successfully!"); 
+      setFormData({ name: '', contact: '' }); 
+      setSnackbarOpen(true); 
     } catch (error) {
       dispatch(createSupplierFailure(error.message));
-      setSnackbarOpen(true); // Show error snackbar
+      setSnackbarOpen(true); 
     }
   };
 

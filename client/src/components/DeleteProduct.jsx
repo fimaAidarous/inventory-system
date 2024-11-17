@@ -47,7 +47,6 @@ const DeleteProduct = ({ productId }) => {
       setSnackbarOpen(true);
     }
   };
-
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };

@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 
 const UpdateCategory = () => {
-  const { categoryId } = useParams(); // Get categoryId from route
+  const { categoryId } = useParams(); 
   const [formData, setFormData] = useState({ name: '' });
   const dispatch = useDispatch();
   const { loading, error, categories } = useSelector((state) => state.category);
@@ -51,11 +51,10 @@ const UpdateCategory = () => {
       if (!response.ok) {
         throw new Error(data.message || 'Failed to update category');
       }
-
       dispatch(updateCategorySuccess(data));
       setSuccessMessage("Category updated successfully!");
       setSnackbarOpen(true);
-      dispatch(fetchCategories()); // Refresh category list
+      dispatch(fetchCategories()); 
     } catch (error) {
       dispatch(updateCategoryFailure(error.message));
       setSnackbarOpen(true);
