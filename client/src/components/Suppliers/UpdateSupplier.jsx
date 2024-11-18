@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-  updateProductStart,
-  updateProductSuccess,
-  updateProductFailure,
-  fetchProducts, 
-} from '../redux/productSlice';
+  updateSupplierStart,
+  updateSupplierSuccess,
+  updateSupplierFailure,
+  fetchSuppliers, // Import the fetchSuppliers action
+} from '../../redux/supplierSlice';
 import {
   Container,
   Typography,
@@ -18,28 +18,28 @@ import {
   Paper,
 } from '@mui/material';
 
-const UpdateProduct = () => {
-  const { productId } = useParams(); 
-  const [formData, setFormData] = useState({ name: '', description: '', price: '', stock_quantity: '' });
+const UpdateSupplier = () => {
+  const { supplierId } = useParams(); 
+  const [formData, setFormData] = useState({ name: '', contact: '' });
   const dispatch = useDispatch();
-  const { loading, error, products } = useSelector((state) => state.product);
+  const { loading, error, suppliers } = useSelector((state) => state.supplier);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    if (products.length > 0) {
-      const productToEdit = products.find((product) => product._id === productId);
-      if (productToEdit) {
-        setFormData({ name: productToEdit.name, description: productToEdit.description, price: productToEdit.price, stock_quantity: productToEdit.stock_quantity });
+    if (suppliers.length > 0) {
+      const supplierToEdit = suppliers.find((supplier) => supplier._id === supplierId);
+      if (supplierToEdit) {
+        setFormData({ name: supplierToEdit.name, contact: supplierToEdit.contact });
       }
     }
-  }, [productId, products]);
+  }, [supplierId, suppliers]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateProductStart());
+    dispatch(updateSupplierStart());
     try {
-      const response = await fetch(`http://localhost:9000/api/products/${productId}`, {
+      const response = await fetch(`http://localhost:9000/api/supplier/${supplierId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -47,17 +47,15 @@ const UpdateProduct = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to update product');
+        throw new Error(data.message || 'Failed to update supplier');
       }
-
-      dispatch(updateProductSuccess(data)); 
-      setSuccessMessage("Product updated successfully!"); 
+      dispatch(updateSupplierSuccess(data)); 
+      setSuccessMessage("Supplier updated successfully!"); 
       setSnackbarOpen(true); 
-      dispatch(fetchProducts());
+      dispatch(fetchSuppliers());
     } catch (error) {
-      dispatch(updateProductFailure(error.message));
+      dispatch(updateSupplierFailure(error.message));
       setSnackbarOpen(true); 
     }
   };
@@ -70,14 +68,14 @@ const UpdateProduct = () => {
     <Container component="main" maxWidth="xs">
       <Paper elevation={6} sx={{ padding: '20px', borderRadius: '16px' }}>
         <Typography variant="h5" align="center" gutterBottom>
-          Edit Product
+          Edit Supplier
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="dense"
             fullWidth
-            label="Product Name"
+            label="Supplier Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
@@ -87,36 +85,14 @@ const UpdateProduct = () => {
             variant="outlined"
             margin="dense"
             fullWidth
-            label="Description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+            label="Supplier Contact"
+            value={formData.contact}
+            onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
             required
-            sx={{ borderRadius: '8px' }}
-          />
-          <TextField
-            variant="outlined"
-            margin="dense"
-            fullWidth
-            label="Price"
-            value={formData.price}
-            onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-            required
-            type="number"
-            sx={{ borderRadius: '8px' }}
-          />
-          <TextField
-            variant="outlined"
-            margin="dense"
-            fullWidth
-            label="Stock Quantity"
-            value={formData.stock_quantity}
-            onChange={(e) => setFormData({ ...formData, stock_quantity: e.target.value })}
-            required
-            type="number"
             sx={{ borderRadius: '8px' }}
           />
           <Button
-            type="dense"
+            type="submit"
             variant="contained"
             color="primary"
             fullWidth
@@ -129,7 +105,7 @@ const UpdateProduct = () => {
               },
             }}
           >
-            {loading ? <CircularProgress size={24} /> : 'Edit Product'}
+            {loading ? <CircularProgress size={24} /> : 'Edit Supplier'}
           </Button>
         </form>
         <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
@@ -142,4 +118,4 @@ const UpdateProduct = () => {
   );
 };
 
-export default UpdateProduct;
+export default UpdateSupplier;

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSuppliers } from "../redux/supplierSlice";
+import { fetchSuppliers } from "../../redux/supplierSlice";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import { Container, Typography, List, ListItem, ListItemText, Button, Grid, Paper, CircularProgress, Snackbar, Alert } from "@mui/material";
-import DeleteSupplier from "./DeleteSupplier";
+import DeleteSupplier from "../Suppliers/DeleteSupplier";
 
 const SupplierList = () => {
   const dispatch = useDispatch();

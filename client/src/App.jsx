@@ -3,18 +3,20 @@ import Header from "./components/Header";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
-import CreateSupplier from './components/CreateSupplier'; 
-import UpdateSupplier from './components/UpdateSupplier'; 
-import DeleteSupplier from './components/DeleteSupplier'; 
-import SupplierList from './components/SupplierList'; 
-import CreateCategory from './components/CreateCategory';
-import UpdateCategory from './components/UpdateCategory';
-import DeleteCategory from './components/DeleteCategory';
-import CategoryList from './components/CategoryList';
-import CreateProduct from './components/CreateProduct'; 
-import UpdateProduct from './components/UpdateProduct'; 
-import DeleteProduct from './components/DeleteProduct'; 
-import ProductList from './components/ProductList'; 
+import CreateSupplier from './components/Suppliers/CreateSupplier'; 
+import UpdateSupplier from './components/Suppliers/UpdateSupplier'; 
+import DeleteSupplier from './components/Suppliers/DeleteSupplier'; 
+import SupplierList from './components/Suppliers/SupplierList'; 
+
+import CreateCategory from './components/Category/CreateCategory';
+import UpdateCategory from './components/Category/UpdateCategory';
+import DeleteCategory from './components/Category/DeleteCategory';
+import CategoryList from './components/Category/CategoryList';
+
+import CreateProduct from './components/Products/CreateProduct'; 
+import UpdateProduct from './components/Products/UpdateProduct'; 
+import DeleteProduct from './components/Products/DeleteProduct'; 
+import ProductList from './components/Products/ProductList'; 
 
 export default function App() {
   return (

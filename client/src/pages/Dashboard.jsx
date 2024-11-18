@@ -26,12 +26,9 @@ import {
 } from "@mui/icons-material";
 import { Link, Routes, Route } from "react-router-dom";
 import Purchases from "../components/Purchases";
-import CreateSupplier from "../components/CreateSupplier";
-import UpdateSupplier from "../components/UpdateSupplier";
-import DeleteSupplier from "../components/DeleteSupplier";
-import SupplierList from "../components/SupplierList";
-import CreateCategory from "../components/CreateCategory"; // Import the CategoryCreate component
-import CreateProduct  from "../components/CreateProduct";
+import CreateSupplier from "../components/Suppliers/CreateSupplier";
+import CreateCategory from "../components/Category/CreateCategory";
+import CreateProduct  from "../components/Products/CreateProduct";
 const drawerWidth = 150;
 
 const Dashboard = () => {
@@ -189,9 +186,6 @@ const Dashboard = () => {
           <Routes>
             <Route path="/purchases" element={<Purchases />} />
             <Route path="/create-supplier" element={<CreateSupplier />} />
-            <Route path="/update-supplier/:id" element={<UpdateSupplier />} />
-            <Route path="/delete-supplier/:id" element={<DeleteSupplier />} />
-            <Route path="/suppliers" element={<SupplierList />} />
             <Route path="/create-category" element={<CreateCategory />} /> 
             <Route path="/create-product" element={<CreateProduct />} />
           </Routes>

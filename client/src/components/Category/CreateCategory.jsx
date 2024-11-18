@@ -14,7 +14,7 @@ import {
   createCategoryStart,
   createCategorySuccess,
   createCategoryFailure,
-} from '../redux/categorySlice';
+} from "../../redux/categorySlice";
 
 const CreateCategory = () => {
   const [formData, setFormData] = useState({ name: '' });

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  deleteSupplierStart,
-  deleteSupplierSuccess,
-  deleteSupplierFailure,
-} from '../redux/supplierSlice';
+  deleteProductStart,
+  deleteProductSuccess,
+  deleteProductFailure,
+} from '../../redux/productSlice';
 import {
   Button,
   CircularProgress,
@@ -12,38 +12,41 @@ import {
   Alert,
 } from '@mui/material';
 
-const DeleteSupplier = ({ supplierId }) => {
+const DeleteProduct = ({ productId }) => {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.supplier);
+  const { loading, error } = useSelector((state) => state.product);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
+
   const handleDelete = async () => {
-    if (!supplierId) {
-      alert('No supplier ID provided. Please try again.');
+    if (!productId) {
+      alert('No product ID provided. Please try again.');
       return;
     }
-    const confirmed = window.confirm('Are you sure you want to delete this supplier?');
+
+    const confirmed = window.confirm('Are you sure you want to delete this product?');
     if (confirmed) {
-      dispatch(deleteSupplierStart());
+      dispatch(deleteProductStart());
       try {
-        const response = await fetch(`http://localhost:9000/api/supplier/${supplierId}`, {
+        const response = await fetch(`http://localhost:9000/api/products/${productId}`, {
           method: 'DELETE',
         });
+
         if (!response.ok) {
           const errorMessage = await response.text();
-          throw new Error(`Failed to delete supplier: ${errorMessage}`);
+          throw new Error(`Failed to delete product: ${errorMessage}`);
         }
-        dispatch(deleteSupplierSuccess(supplierId));
-        setSuccessMessage('Supplier deleted successfully!');
+
+        dispatch(deleteProductSuccess(productId));
+        setSuccessMessage('Product deleted successfully!');
       } catch (err) {
         console.error('Delete Error:', err);
-        dispatch(deleteSupplierFailure(err.message));
-        setSuccessMessage('Failed to delete supplier.');
+        dispatch(deleteProductFailure(err.message));
+        setSuccessMessage('Failed to delete product.');
       }
       setSnackbarOpen(true);
     }
   };
-
   const handleCloseSnackbar = () => {
     setSnackbarOpen(false);
   };
@@ -64,16 +67,9 @@ const DeleteSupplier = ({ supplierId }) => {
       >
         {loading ? <CircularProgress size={24} /> : 'Delete'}
       </Button>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity={error ? 'error' : 'success'}
-          sx={{ width: '100%' }}
-        >
+
+      <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
+        <Alert onClose={handleCloseSnackbar} severity={error ? 'error' : 'success'} sx={{ width: '100%' }}>
           {successMessage}
         </Alert>
       </Snackbar>
@@ -81,4 +77,4 @@ const DeleteSupplier = ({ supplierId }) => {
   );
 };
 
-export default DeleteSupplier;
+export default DeleteProduct;

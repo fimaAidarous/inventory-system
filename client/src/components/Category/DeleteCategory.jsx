@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteCategoryStart, deleteCategorySuccess, deleteCategoryFailure, fetchCategories } from '../redux/categorySlice';
+import { deleteCategoryStart, deleteCategorySuccess, deleteCategoryFailure, fetchCategories } from "../../redux/categorySlice";
 import { Button, Snackbar, Alert } from '@mui/material';
 
 const DeleteCategory = ({ categoryId }) => {

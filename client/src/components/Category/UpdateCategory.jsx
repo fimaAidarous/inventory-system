@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
-  updateSupplierStart,
-  updateSupplierSuccess,
-  updateSupplierFailure,
-  fetchSuppliers, // Import the fetchSuppliers action
-} from '../redux/supplierSlice';
+  updateCategoryStart,
+  updateCategorySuccess,
+  updateCategoryFailure,
+  fetchCategories,
+} from '../../redux/categorySlice';
 import {
   Container,
   Typography,
@@ -18,28 +18,28 @@ import {
   Paper,
 } from '@mui/material';
 
-const UpdateSupplier = () => {
-  const { supplierId } = useParams(); 
-  const [formData, setFormData] = useState({ name: '', contact: '' });
+const UpdateCategory = () => {
+  const { categoryId } = useParams(); 
+  const [formData, setFormData] = useState({ name: '' });
   const dispatch = useDispatch();
-  const { loading, error, suppliers } = useSelector((state) => state.supplier);
+  const { loading, error, categories } = useSelector((state) => state.category);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    if (suppliers.length > 0) {
-      const supplierToEdit = suppliers.find((supplier) => supplier._id === supplierId);
-      if (supplierToEdit) {
-        setFormData({ name: supplierToEdit.name, contact: supplierToEdit.contact });
+    if (categories.length > 0) {
+      const categoryToEdit = categories.find((category) => category._id === categoryId);
+      if (categoryToEdit) {
+        setFormData({ name: categoryToEdit.name });
       }
     }
-  }, [supplierId, suppliers]);
+  }, [categoryId, categories]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(updateSupplierStart());
+    dispatch(updateCategoryStart());
     try {
-      const response = await fetch(`http://localhost:9000/api/supplier/${supplierId}`, {
+      const response = await fetch(`http://localhost:9000/api/categories/${categoryId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -47,16 +47,17 @@ const UpdateSupplier = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
+
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to update supplier');
+        throw new Error(data.message || 'Failed to update category');
       }
-      dispatch(updateSupplierSuccess(data)); 
-      setSuccessMessage("Supplier updated successfully!"); 
-      setSnackbarOpen(true); 
-      dispatch(fetchSuppliers());
+      dispatch(updateCategorySuccess(data));
+      setSuccessMessage("Category updated successfully!");
+      setSnackbarOpen(true);
+      dispatch(fetchCategories()); 
     } catch (error) {
-      dispatch(updateSupplierFailure(error.message));
-      setSnackbarOpen(true); 
+      dispatch(updateCategoryFailure(error.message));
+      setSnackbarOpen(true);
     }
   };
 
@@ -68,26 +69,16 @@ const UpdateSupplier = () => {
     <Container component="main" maxWidth="xs">
       <Paper elevation={6} sx={{ padding: '20px', borderRadius: '16px' }}>
         <Typography variant="h5" align="center" gutterBottom>
-          Edit Supplier
+          Edit Category
         </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="dense"
             fullWidth
-            label="Supplier Name"
+            label="Category Name"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            required
-            sx={{ borderRadius: '8px' }}
-          />
-          <TextField
-            variant="outlined"
-            margin="dense"
-            fullWidth
-            label="Supplier Contact"
-            value={formData.contact}
-            onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
             required
             sx={{ borderRadius: '8px' }}
           />
@@ -97,15 +88,9 @@ const UpdateSupplier = () => {
             color="primary"
             fullWidth
             disabled={loading}
-            sx={{
-              marginTop: '16px',
-              boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.2)',
-              '&:hover': {
-                boxShadow: '0px 6px 20px rgba(0, 0, 0, 0.3)',
-              },
-            }}
+            sx={{ marginTop: '16px' }}
           >
-            {loading ? <CircularProgress size={24} /> : 'Edit Supplier'}
+            {loading ? <CircularProgress size={24} /> : 'Edit Category'}
           </Button>
         </form>
         <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar}>
@@ -118,4 +103,4 @@ const UpdateSupplier = () => {
   );
 };
 
-export default UpdateSupplier;
+export default UpdateCategory;

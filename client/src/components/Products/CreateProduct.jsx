@@ -15,9 +15,9 @@ import {
   createProductStart,
   createProductSuccess,
   createProductFailure,
-} from "../redux/productSlice";
-import { fetchCategories } from "../redux/categorySlice";
-import { fetchSuppliers } from "../redux/supplierSlice";
+} from "../../redux/productSlice";
+import { fetchCategories } from "../../redux/categorySlice";
+import { fetchSuppliers } from "../../redux/supplierSlice";
 
 const CreateProduct = () => {
   const [formData, setFormData] = useState({

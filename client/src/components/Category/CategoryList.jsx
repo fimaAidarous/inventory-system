@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCategories } from "../redux/categorySlice";
+import { fetchCategories } from "../../redux/categorySlice";
 import { Link } from "react-router-dom";
 import { Container, Typography, List, ListItem, ListItemText, Button, Grid, Paper, CircularProgress, Snackbar, Alert } from "@mui/material";
-import DeleteCategory from "./DeleteCategory";
+import DeleteCategory from "../Category/DeleteCategory";
 
 const CategoryList = () => {
   const dispatch = useDispatch();

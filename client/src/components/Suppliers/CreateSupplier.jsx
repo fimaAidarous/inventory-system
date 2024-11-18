@@ -10,7 +10,7 @@ import {
   Alert,
   Paper,
 } from '@mui/material';
-import { createSupplierStart, createSupplierSuccess, createSupplierFailure } from '../redux/supplierSlice';
+import { createSupplierStart, createSupplierSuccess, createSupplierFailure } from "../../redux/supplierSlice";
 
 const CreateSupplier = () => {
   const [formData, setFormData] = useState({ name: '', contact: '' });
