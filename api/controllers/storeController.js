@@ -1,7 +1,7 @@
 import Store from '../models/storeModel.js';
 import Product from '../models/productModel.js';
 import mongoose from 'mongoose';
-import { json } from 'express';
+
 
 export const createStore = async (req,res) => {
     const { productId, quantity } = req.body;
@@ -81,4 +81,19 @@ export const getStore = async(req,res,next) => {
     }
 };
 
+export const deleteStore = async (req,res,next) => {
+    const { id } = req.params;
+
+    try {
+       const deleteStore = await Store.findByIdAndDelete(id);
+       
+       if (!deleteStore) {
+        return res.status(404).json({ message: 'Store not found!'});
+       }
+
+    res.status(200).json({ message: 'Store deleted successfully!'});
+    } catch (error) {
+        next(error);
+    }
+};
 
