@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Dashboard from "./pages/Dashboard";
+
 import CreateSupplier from './components/Suppliers/CreateSupplier'; 
 import UpdateSupplier from './components/Suppliers/UpdateSupplier'; 
 import DeleteSupplier from './components/Suppliers/DeleteSupplier'; 
@@ -17,6 +18,8 @@ import CreateProduct from './components/Products/CreateProduct';
 import UpdateProduct from './components/Products/UpdateProduct'; 
 import DeleteProduct from './components/Products/DeleteProduct'; 
 import ProductList from './components/Products/ProductList'; 
+
+import CreateStores from "./components/Stores/CreateStores";
 
 export default function App() {
   return (
@@ -44,6 +47,10 @@ export default function App() {
         <Route path="/update-product/:productId" element={<UpdateProduct />} />
         <Route path="/delete-product/:productId" element={<DeleteProduct />} />
         <Route path="/products" element={<ProductList />} /> 
+        
+
+        {/* Stores routes */}
+        <Route path="/create-stores" element={<CreateStores />} />
 
       </Routes>
     </BrowserRouter>

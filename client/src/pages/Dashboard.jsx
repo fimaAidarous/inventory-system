@@ -23,12 +23,15 @@ import {
   ShoppingCart,
   People,
   Category,
+  Store,
 } from "@mui/icons-material";
 import { Link, Routes, Route } from "react-router-dom";
 import Purchases from "../components/Purchases";
 import CreateSupplier from "../components/Suppliers/CreateSupplier";
 import CreateCategory from "../components/Category/CreateCategory";
-import CreateProduct  from "../components/Products/CreateProduct";
+import CreateProduct from "../components/Products/CreateProduct";
+import CreateStores from "../components/Stores/CreateStores";
+
 const drawerWidth = 150;
 
 const Dashboard = () => {
@@ -83,11 +86,17 @@ const Dashboard = () => {
           </ListItemIcon>
           <ListItemText primary="Suppliers" />
         </ListItem>
-        <ListItem button component={Link} to="/create-category"> {/* New ListItem for CategoryCreate */}
+        <ListItem button component={Link} to="/create-category">
           <ListItemIcon sx={{ minWidth: "3px" }}>
             <Category />
           </ListItemIcon>
           <ListItemText primary="Category" />
+        </ListItem>
+        <ListItem button component={Link} to="/create-stores">
+          <ListItemIcon sx={{ minWidth: "3px" }}>
+            <Store />
+          </ListItemIcon>
+          <ListItemText primary="Stores" />
         </ListItem>
       </List>
     </div>
@@ -182,12 +191,12 @@ const Dashboard = () => {
           }}
         >
           <Toolbar />
-
           <Routes>
             <Route path="/purchases" element={<Purchases />} />
             <Route path="/create-supplier" element={<CreateSupplier />} />
-            <Route path="/create-category" element={<CreateCategory />} /> 
+            <Route path="/create-category" element={<CreateCategory />} />
             <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/create-stores" element={<CreateStores />} />
           </Routes>
         </Box>
       </Box>
