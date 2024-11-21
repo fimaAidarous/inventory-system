@@ -26,7 +26,7 @@ import {
   Store,
 } from "@mui/icons-material";
 import { Link, Routes, Route } from "react-router-dom";
-import Purchases from "../components/Purchases";
+import Purchases from "../components/Purchases/Purchases";
 import CreateSupplier from "../components/Suppliers/CreateSupplier";
 import CreateCategory from "../components/Category/CreateCategory";
 import CreateProduct from "../components/Products/CreateProduct";

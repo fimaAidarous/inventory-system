@@ -20,6 +20,9 @@ import DeleteProduct from './components/Products/DeleteProduct';
 import ProductList from './components/Products/ProductList'; 
 
 import CreateStores from "./components/Stores/CreateStores";
+import UpdateStore from "./components/Stores/UpdateStores";
+import DeleteStores from "./components/Stores/DeleteStores";
+import StoreList from "./components/Stores/StoreList";
 
 export default function App() {
   return (
@@ -51,7 +54,9 @@ export default function App() {
 
         {/* Stores routes */}
         <Route path="/create-stores" element={<CreateStores />} />
-
+        <Route path="/update-stores/:storeId" element={<UpdateStore />} />
+        <Route path="/delete-stores/:storeId" element={<DeleteStores />} />
+        <Route path="/stores" element={<StoreList />} /> 
       </Routes>
     </BrowserRouter>
   );
